@@ -1,7 +1,12 @@
 {
   "dependencies": {
-    "angular": "^1.6.2",
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-touch": "^1.6.3",
+    "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "1.0.0-beta.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
     "sockjs-client": "^1.1.2",
     "webmidi": "^2.0.0-rc.5"
   },
@@ -29,6 +34,7 @@
     "eslint-plugin-angular": "^1.6.1",
     "eslint-plugin-babel": "^4.0.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "file-loader": "^0.10.1",
     "gulp": "gulpjs/gulp#4ed9a4a3275559c73a396eff7e1fde3824951ebb",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^2.0.0",
@@ -65,6 +71,7 @@
     "tslint": "^4.4.2",
     "tslint-loader": "^3.4.2",
     "typescript": "^2.1.0",
+    "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-fail-plugin": "^1.0.5"
   },
