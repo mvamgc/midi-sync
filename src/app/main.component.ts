@@ -6,7 +6,9 @@ export const main: angular.IComponentOptions = {
   /* @ngInject */
   controller: function (midiService: MidiService) { // eslint-disable-line babel/object-shorthand
     //
-    midiService.connect();
+    midiService.connect().then(() => {
+      console.log("Output[0]: %o", midiService.getOutputs()[0]);
+    });
 
   }
 };

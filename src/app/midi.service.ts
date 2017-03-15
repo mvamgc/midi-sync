@@ -20,6 +20,13 @@ export class MidiService {
       });
     });
   }
+
+  getOutputs() {
+    return WebMidi.outputs;
+  }
+  getInputs() {
+    return WebMidi.inputs;
+  }
 }
 
 app.service('midiService', MidiService);
