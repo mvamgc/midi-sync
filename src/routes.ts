@@ -6,8 +6,8 @@ function routesConfig($stateProvider: angular.ui.IStateProvider, $urlRouterProvi
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('app', {
+    .state('main', {
       url: '/',
-      component: 'app'
+      component: 'main'
     });
 }
