@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 
-import {hello} from './app/hello';
+import {main} from './app/main.component';
 import 'angular-ui-router';
 import routesConfig from './routes';
 
@@ -11,4 +11,4 @@ export const app: string = 'app';
 angular
   .module(app, ['ui.router'])
   .config(routesConfig)
-  .component('app', hello);
+  .component('app', main);
