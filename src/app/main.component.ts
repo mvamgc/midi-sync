@@ -11,7 +11,7 @@ class MainController {
   outputDisabled: boolean = true;
 
   /* @ngInject */
-  constructor(private $log: angular.ILogService, midiService: MidiService) {
+  constructor(private $log: angular.ILogService, private midiService: MidiService) {
     midiService.connect().then(() => {
       console.log('Output[0]: %o', midiService.getOutputs()[0]);
       this.inputs = midiService.getInputs();
@@ -36,6 +36,9 @@ class MainController {
     if (selectedInputArray.length > 0) {
       this.selectedInput = selectedInputArray[0];
       this.inputDisabled = false;
+
+      this.inputs.forEach(inp => this.midiService.deactivateInput(inp));
+      this.midiService.activateInput(this.selectedInput);
     }
   }
   outputSelection(outputId) {
@@ -44,6 +47,7 @@ class MainController {
     if (selectedOutputArray.length > 0) {
       this.selectedOutput = selectedOutputArray[0];
       this.outputDisabled = false;
+      this.midiService.activateOutput(this.selectedOutput);
     }
   }
 }
