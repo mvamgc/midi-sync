@@ -70,24 +70,24 @@ export class MidiService {
   }
   noteonListener(noteonEvent) {
     let noteData = this.filterNoteData(noteonEvent);
-    console.log("noteon: %o", JSON.stringify(noteData));
+    console.log('noteon: %o', JSON.stringify(noteData));
     this.sendEvent(noteData);
   }
   noteoffListener(noteoffEvent) {
     let noteData = this.filterNoteData(noteoffEvent);
-    console.log("noteon: %o", JSON.stringify(noteData));
+    console.log('noteon: %o', JSON.stringify(noteData));
     this.sendEvent(noteData);
   }
 
   sendEvent(noteData) {
-    if(this.output) {
+    if (this.output) {
       setTimeout(() => {
         // this.output.playNote(noteData.note.name + noteData.note.octave);
         // this.output.sendData();
         console.log('noteData.data: %o', noteData.data);
         var status = noteData.data[0];
         var rawData = [];
-        for(var i=1; i<noteData.data.length; i++) {
+        for (var i = 1; i < noteData.data.length; i++) {
           rawData.push(noteData.data[i]);
         }
         console.log('sending status: %o', status);

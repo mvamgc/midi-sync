@@ -15,13 +15,13 @@ class MainController {
     midiService.connect().then(() => {
       console.log('Output[0]: %o', midiService.getOutputs()[0]);
       this.inputs = midiService.getInputs();
-      if(this.inputs.length > 0) {
+      if (this.inputs.length > 0) {
         this.inputSelection(this.inputs[this.inputs.length - 1].id);
         // this.selectedInput = this.inputs[this.inputs.length - 1];
         // this.inputDisabled = false;
       }
       this.outputs = midiService.getOutputs();
-      if(this.outputs.length > 0) {
+      if (this.outputs.length > 0) {
         this.outputSelection(this.outputs[this.outputs.length - 1].id);
         // this.selectedOutput = this.outputs[this.outputs.length - 1];
         // this.outputDisabled = false;
