@@ -8,6 +8,8 @@ export const main: angular.IComponentOptions = {
     //
     midiService.connect().then(() => {
       console.log("Output[0]: %o", midiService.getOutputs()[0]);
+      this.inputs = midiService.getInputs();
+      console.log(this.inputs);
     });
 
   }
