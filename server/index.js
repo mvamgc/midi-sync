@@ -1,10 +1,16 @@
 'use strict';
 const express = require('express');
+const http = require('http');
+
+const sockjsMIDISync = require('./SockjsMIDISync');
+
+const port = process.env.PORT || 5000;
 
 const app = express();
-const port = process.env.PORT || 5000;
+const server = http.createServer(app);
+
+sockjsMIDISync.installHandlers(server, {prefix: '/api/midi'});
+
 app.use(express.static('dist'));
 
-app.listen(port, function() {
-    console.log('app started on port ' + port);
-})
+server.listen(port, () => console.log('app ' + process.pid + ' started on port ' + port));
