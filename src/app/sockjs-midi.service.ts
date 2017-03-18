@@ -1,7 +1,18 @@
 import {app} from './app.module';
 
-export class SockJSMidiService {
+const URL = '/api/midi';
 
+export class SockJSMidiService {
+  /* @ngInject */
+  constructor(private $log: angular.ILogService) {
+
+  }
+  connect() {
+    this.$log.log('Connecting to ' + URL);
+  }
+
+  close() {}
 }
 
-app.service('socjsMidiService', SockJSMidiService);
+app.service('sockJSMidiService', SockJSMidiService);
+

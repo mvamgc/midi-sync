@@ -1,6 +1,5 @@
 import {app} from './app.module';
 import {MidiService} from './midi.service';
-import {generate} from 'project-name-generator';
 
 class MainController {
   inputs: any[] = [];
@@ -11,7 +10,6 @@ class MainController {
   selectedOutput: any = {name: 'MIDI Output is not available'};
   outputDisabled: boolean = true;
 
-  channel: string;
   connected: boolean;
 
   /* @ngInject */
@@ -28,7 +26,6 @@ class MainController {
       }
       console.log(this.inputs);
 
-      this.channel = generate({ number: true}).dashed;
       this.connected = false;
     });
   }

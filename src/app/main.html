@@ -1,17 +1,6 @@
 <div>
   <h2>MIDI Sync</h2>
-  <div class="row">
-    <div class="col-md-1">
-      <label>Channel</label>
-    </div>
-    <div class="col-md-2">
-        <input type="text" class="form-control" ng-model="$ctrl.channel">
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-primary" ng-show="!$ctrl.connected">Connect</button>
-      <button class="btn btn-danger" ng-show="$ctrl.connected">Disconnect</button>
-    </div>
-  </div>
+  <server-control class="row"></server-control>
   <br/>
   <div class="row">
     <div class="col-md-3">
@@ -43,6 +32,15 @@
           <li role="menuitem" ng-repeat="output in $ctrl.outputs"><a href="#" ng-click="$ctrl.outputSelection(output.id)">{{output.name}}</a></li>
         </ul>
       </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-1">
+      <button class="btn btn-primary" ng-show="$ctrl.connected">Test 1</button>
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-primary" ng-show="$ctrl.connected">Test 2</button>
     </div>
   </div>
 </div>

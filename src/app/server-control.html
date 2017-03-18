@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-1">
+    <label>Channel</label>
+  </div>
+  <div class="col-md-2">
+    <input type="text" class="form-control" ng-model="$ctrl.channel">
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary" ng-show="!$ctrl.connected" ng-click="$ctrl.connect()" ng-disabled="$ctrl.connecting">{{$ctrl.connectionButton}}</button>
+    <button class="btn btn-danger" ng-show="$ctrl.connected" ng-click="$ctrl.close()">Disconnect</button>
+  </div>
+</div>
