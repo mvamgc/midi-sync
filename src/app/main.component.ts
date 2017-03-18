@@ -1,5 +1,6 @@
 import {app} from './app.module';
 import {MidiService} from './midi.service';
+import {generate} from 'project-name-generator';
 
 class MainController {
   inputs: any[] = [];
@@ -11,6 +12,7 @@ class MainController {
   outputDisabled: boolean = true;
 
   channel: string;
+  connected: boolean;
 
   /* @ngInject */
   constructor(private $log: angular.ILogService, private midiService: MidiService) {
@@ -26,7 +28,8 @@ class MainController {
       }
       console.log(this.inputs);
 
-      this.channel = 'test channel';
+      this.channel = generate({ number: true}).dashed;
+      this.connected = false;
     });
   }
 
