@@ -23,7 +23,7 @@ class ServerControl {
     this.sockJSMidiService.connect();
     this.sockJSMidiService.onOpen(connectionId => {
       this.$scope.$apply(() => {
-        console.log("Connectionid: "+connectionId);
+        console.log('Connectionid: ' + connectionId);
         this.connected = true;
         this.connecting = false;
         this.connectionButton = CONNECT;
