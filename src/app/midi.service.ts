@@ -39,22 +39,22 @@ export class MidiService {
     return WebMidi.inputs;
   }
 
-  deactivateInput(input) {
+  deactivateInput(input: any) {
     this.listeners.forEach(listener => {
       input.removeListener(listener.event);
     });
   }
-  activateInput(input) {
+  activateInput(input: any) {
     this.listeners.forEach(listener => {
       input.addListener(listener.event, 'all', listener.listener);
     });
   }
 
-  activateOutput(output) {
+  activateOutput(output: any) {
     this.output = output;
   }
 
-  filterNoteData(note) {
+  filterNoteData(note: any) {
     return {
       data: note.data,
       note: note.note,
@@ -68,18 +68,18 @@ export class MidiService {
       controller: note.controller
     };
   }
-  noteonListener(noteonEvent) {
+  noteonListener(noteonEvent: any) {
     let noteData = this.filterNoteData(noteonEvent);
     console.log('noteon: %o', JSON.stringify(noteData));
     this.sendEvent(noteData);
   }
-  noteoffListener(noteoffEvent) {
+  noteoffListener(noteoffEvent: any) {
     let noteData = this.filterNoteData(noteoffEvent);
     console.log('noteon: %o', JSON.stringify(noteData));
     this.sendEvent(noteData);
   }
 
-  sendEvent(noteData) {
+  sendEvent(noteData: any) {
     if (this.output) {
       setTimeout(() => {
         // this.output.playNote(noteData.note.name + noteData.note.octave);

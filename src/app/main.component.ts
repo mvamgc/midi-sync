@@ -30,7 +30,7 @@ class MainController {
     });
   }
 
-  inputSelection(inputId) {
+  inputSelection(inputId: string) {
     this.$log.log('input selection: %o', inputId);
     var selectedInputArray = this.inputs.filter(input => input.id === inputId);
     if (selectedInputArray.length > 0) {
@@ -41,7 +41,7 @@ class MainController {
       this.midiService.activateInput(this.selectedInput);
     }
   }
-  outputSelection(outputId) {
+  outputSelection(outputId: string) {
     this.$log.log('output selection: %o', outputId);
     var selectedOutputArray = this.outputs.filter(output => output.id === outputId);
     if (selectedOutputArray.length > 0) {
