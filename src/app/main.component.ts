@@ -10,6 +10,8 @@ class MainController {
   selectedOutput: any = {name: 'MIDI Output is not available'};
   outputDisabled: boolean = true;
 
+  channel: string;
+
   /* @ngInject */
   constructor(private $log: angular.ILogService, private midiService: MidiService) {
     midiService.connect().then(() => {
@@ -17,16 +19,14 @@ class MainController {
       this.inputs = midiService.getInputs();
       if (this.inputs.length > 0) {
         this.inputSelection(this.inputs[this.inputs.length - 1].id);
-        // this.selectedInput = this.inputs[this.inputs.length - 1];
-        // this.inputDisabled = false;
       }
       this.outputs = midiService.getOutputs();
       if (this.outputs.length > 0) {
         this.outputSelection(this.outputs[this.outputs.length - 1].id);
-        // this.selectedOutput = this.outputs[this.outputs.length - 1];
-        // this.outputDisabled = false;
       }
       console.log(this.inputs);
+
+      this.channel = 'test channel';
     });
   }
 

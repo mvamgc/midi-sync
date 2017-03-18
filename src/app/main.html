@@ -2,6 +2,13 @@
   <h2>MIDI Sync</h2>
   <div class="row">
     <div class="col-md-3">
+      <label>Channel</label>
+        <input type="text" class="form-control" ng-model="$ctrl.channel">
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-3">
       <div class="btn-group" uib-dropdown is-open="status.isopenInput">
         <button id="single-button"
                 type="button"
