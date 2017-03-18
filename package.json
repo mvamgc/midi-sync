@@ -45,6 +45,7 @@
     "gulp-insert": "^0.5.0",
     "gulp-less": "^3.3.0",
     "gulp-ng-annotate": "^2.0.0",
+    "gulp-nodemon": "^2.2.1",
     "gulp-util": "^3.0.8",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.28.0",
