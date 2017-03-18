@@ -1,4 +1,5 @@
 const sockjs = require('sockjs');
+
 const sockjsOpts = {};
 const sockjsMIDISync = sockjs.createServer(sockjsOpts);
 

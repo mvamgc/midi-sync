@@ -54,7 +54,6 @@ class MainController {
 
 export const main: angular.IComponentOptions = {
   template: require('./main.html'),
-  /* @ngInject */
   controller: MainController
 };
 

@@ -1,6 +1,15 @@
 module.exports = class MidiDataRouter {
 
-  addConnection(conn) {
-    console.log(`adding connection ${conn}`);
+  addConnection(con) {
+    console.log(`adding connection ${con}`);
+    this.sendConnectionId(con);
+  }
+
+  sendConnectionId(con) {
+    var connectionId = con.id; //generate random ?
+    con.write(JSON.stringify({
+      type: 'connected',
+      connectionId: connectionId
+    }));
   }
 }
