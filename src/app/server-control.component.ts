@@ -12,7 +12,7 @@ class ServerControl {
   connectionButton: string = CONNECT;
 
   /* @ngInject */
-  constructor(private $log: angular.ILogService, private $scope: angular.IScope, private sockJSMidiService: SockJSMidiService) {
+  constructor(private $log: angular.ILogService, private $scope: angular.IScope, private $timeout: angular.ITimeoutService, private sockJSMidiService: SockJSMidiService) {
     this.channel = generate({ number: true}).dashed;
     this.connected = false;
     this.connecting = false;
@@ -30,12 +30,19 @@ class ServerControl {
       });
     });
     this.sockJSMidiService.onClose(() => {
-      this.$scope.$apply(() => {
+      this.$timeout(() => {
         this.connected = false;
         this.connecting = false;
         this.connectionButton = CONNECT;
       });
     });
+  }
+
+  close() {
+    this.sockJSMidiService.close();
+    this.connected = false;
+    this.connecting = false;
+    this.connectionButton = CONNECT;
   }
 }
 
