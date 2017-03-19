@@ -80,6 +80,11 @@ export class SockJSMidiService {
       this.openListeners.forEach(listener => listener(data.connectionId));
     }
   }
+
+  sendMessage(msg) {
+    var msgJson = JSON.stringify(msg);
+    this.sock.send(msgJson);
+  }
 }
 
 app.service('sockJSMidiService', SockJSMidiService);

@@ -11,4 +11,8 @@ sockjsMIDISync.on('connection', conn => {
   midiDataRouterInstance.addConnection(conn);
 });
 
+sockjsMIDISync.on('data', message => {
+  console.log('Message received: ' + JSON.stringify(message));
+});
+
 module.exports = sockjsMIDISync;

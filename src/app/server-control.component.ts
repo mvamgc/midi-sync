@@ -44,6 +44,13 @@ class ServerControl {
     this.connecting = false;
     this.connectionButton = CONNECT;
   }
+
+  sendTestMessage1() {
+    this.sockJSMidiService.sendMessage({type:'test1'});
+  }
+  sendTestMessage2() {
+    this.sockJSMidiService.sendMessage({type:'test2'});
+  }
 }
 
 export const serverControlComponent: angular.IComponentOptions = {

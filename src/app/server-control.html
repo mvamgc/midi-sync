@@ -9,4 +9,10 @@
     <button class="btn btn-primary" ng-show="!$ctrl.connected" ng-click="$ctrl.connect()" ng-disabled="$ctrl.connecting">{{$ctrl.connectionButton}}</button>
     <button class="btn btn-danger" ng-show="$ctrl.connected" ng-click="$ctrl.close()">Disconnect</button>
   </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary" ng-show="$ctrl.connected" ng-click="$ctrl.sendTestMessage1()">Test 1</button>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-primary" ng-show="$ctrl.connected" ng-click="$ctrl.sendTestMessage2()">Test 2</button>
+  </div>
 </div>
