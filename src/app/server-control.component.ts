@@ -46,10 +46,10 @@ class ServerControl {
   }
 
   sendTestMessage1() {
-    this.sockJSMidiService.sendMessage({type:'test1'});
+    this.sockJSMidiService.sendMessage({type:'test1', channel: this.channel});
   }
   sendTestMessage2() {
-    this.sockJSMidiService.sendMessage({type:'test2'});
+    this.sockJSMidiService.sendMessage({type:'test2', channel: this.channel});
   }
 }
 

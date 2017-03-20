@@ -11,5 +11,10 @@ module.exports = class MidiDataRouter {
       type: 'connected',
       connectionId: connectionId
     }));
+
+    con.on('data', message => {
+      console.log('Message received[1]: ' + message);
+    });
+
   }
 }
