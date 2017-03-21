@@ -45,7 +45,7 @@ module.exports = class MidiDataRouter {
     console.log('send data to connections: ' + connections);
     connections.forEach(conToSendId => {
       var msg2Send = Object.assign({}, msg);
-      msg2Send.sendTs = new Date();
+      msg2Send.sendSr = new Date();
       if(conId === conToSendId) {
         msg2Send.echo = true;
       }

@@ -76,12 +76,13 @@ export class SockJSMidiService {
   private onmessage(event: MessageEvent) {
     console.log('message received at %s: %o', JSON.stringify(new Date()), event.data);
     const data = JSON.parse(event.data);
-    if(data.type === 'connected') {
+    if (data.type === 'connected') {
       this.openListeners.forEach(listener => listener(data.connectionId));
     }
   }
 
-  sendMessage(msg) {
+  sendMessage(msg: any) {
+    msg.sendCl = new Date();
     var msgJson = JSON.stringify(msg);
     this.sock.send(msgJson);
   }
