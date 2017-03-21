@@ -13,6 +13,21 @@ module.exports = class MidiDataRouter {
     console.log(`adding connection ${con}`);
     this.sendConnectionId(con);
   }
+  removeConnection(conId) {
+    if(this.conChannelMap[conId]) {
+      var currentChannel = this.conChannelMap[conId];
+      this.channelConMap[this.conChannelMap[conId]] = this.channelConMap[this.conChannelMap[conId]].filter(id => id !== conId);
+      
+      if(this.channelConMap[this.conChannelMap[conId]].length === 0) {
+        delete this.channelConMap[this.conChannelMap[conId]];
+      }
+
+      delete this.conChannelMap[conId];
+    }
+
+    console.log('this.conChannelMap: ' + JSON.stringify(this.conChannelMap));
+    console.log('this.channelConMap: ' + JSON.stringify(this.channelConMap));
+  }
 
   sendConnectionId(con) {
     const connectionId = con.id; // generate random ?
@@ -38,6 +53,9 @@ module.exports = class MidiDataRouter {
       }
       if (this.conChannelMap[conId]) {
         this.channelConMap[this.conChannelMap[conId]] = this.channelConMap[this.conChannelMap[conId]].filter(id => id !== conId);
+        if (this.channelConMap[this.conChannelMap[conId]].length === 0) {
+          delete this.channelConMap[this.conChannelMap[conId]];
+        }
       }
       if (!this.channelConMap[channel]) {
         this.channelConMap[channel] = [];

@@ -14,6 +14,10 @@ sockjsMIDISync.on('connection', conn => {
     console.log(`Message received[1]: ${message} from ${conn.id}`);
     midiDataRouterInstance.routeMessage(conn.id, JSON.parse(message));
   });
+  conn.on('close', () => {
+    console.log(`Connection ${conn.id} is closed`);
+    midiDataRouterInstance.removeConnection(conn.id);
+  });
 });
 
 
