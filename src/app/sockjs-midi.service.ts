@@ -52,7 +52,7 @@ export class SockJSMidiService {
     this.sock.onclose = function() {
       console.log('close');
       this.sendCloseNotifications();
-    };
+    }.bind(this);
     this.sock.onmessage = this.onmessage.bind(this);
   }
 

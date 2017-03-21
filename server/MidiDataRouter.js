@@ -11,6 +11,7 @@ module.exports = class MidiDataRouter {
 
   addConnection(con) {
     console.log(`adding connection ${con}`);
+    this.connections[con.id] = con;
     this.sendConnectionId(con);
   }
   removeConnection(conId) {
@@ -23,6 +24,7 @@ module.exports = class MidiDataRouter {
       }
 
       delete this.conChannelMap[conId];
+      delete this.connections[conId];
     }
 
     console.log('this.conChannelMap: ' + JSON.stringify(this.conChannelMap));
@@ -41,6 +43,15 @@ module.exports = class MidiDataRouter {
     this.updateChannelForConnection(conId, msg.channel);
     const connections = this.channelConMap[msg.channel];
     console.log('send data to connections: ' + connections);
+    connections.forEach(conToSendId => {
+      var msg2Send = Object.assign({}, msg);
+      msg2Send.sendTs = new Date();
+      if(conId === conToSendId) {
+        msg2Send.echo = true;
+      }
+      console.log('send data to connection: ' + conToSendId);
+      this.connections[conToSendId].write(JSON.stringify(msg2Send));
+    });
   }
 
   updateChannelForConnection(conId, channel) {
