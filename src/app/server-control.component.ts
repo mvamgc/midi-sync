@@ -1,6 +1,7 @@
 import {app} from './app.module';
 import {generate} from 'project-name-generator';
 import {SockJSMidiService} from './sockjs-midi.service';
+import {MidiService} from './midi.service';
 
 const CONNECT = 'Connect';
 const CONNECTING = 'Connecting';
@@ -12,11 +13,17 @@ class ServerControl {
   connectionButton: string = CONNECT;
 
   /* @ngInject */
-  constructor(private $log: angular.ILogService, private $scope: angular.IScope, private $timeout: angular.ITimeoutService, private sockJSMidiService: SockJSMidiService) {
+  constructor(private $log: angular.ILogService, private $scope: angular.IScope, private $timeout: angular.ITimeoutService, private sockJSMidiService: SockJSMidiService, private midiService: MidiService) {
     this.channel = generate({ number: true}).dashed;
+    midiService.setServerChannel(this.channel);
     this.connected = false;
     this.connecting = false;
   }
+
+  onChannelChange() {
+    this.midiService.setServerChannel(this.channel);
+  }
+
   connect() {
     this.connecting = true;
     this.connectionButton = CONNECTING;
@@ -46,10 +53,10 @@ class ServerControl {
   }
 
   sendTestMessage1() {
-    this.sockJSMidiService.sendMessage({type:'test1', channel: this.channel});
+    this.sockJSMidiService.sendMessage({type: 'test1', channel: this.channel});
   }
   sendTestMessage2() {
-    this.sockJSMidiService.sendMessage({type:'test2', channel: this.channel});
+    this.sockJSMidiService.sendMessage({type: 'test2', channel: this.channel});
   }
 }
 

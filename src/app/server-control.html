@@ -3,7 +3,7 @@
     <label>Channel</label>
   </div>
   <div class="col-md-2">
-    <input type="text" class="form-control" ng-model="$ctrl.channel">
+    <input type="text" class="form-control" ng-model="$ctrl.channel" ng-change="$ctrl.onChannelChange()">
   </div>
   <div class="col-md-1">
     <button class="btn btn-primary" ng-show="!$ctrl.connected" ng-click="$ctrl.connect()" ng-disabled="$ctrl.connecting">{{$ctrl.connectionButton}}</button>

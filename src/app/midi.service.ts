@@ -1,6 +1,7 @@
 import * as WebMidi from 'webmidi';
 
 import {app} from './app.module';
+import {SockJSMidiService} from './sockjs-midi.service';
 
 export class MidiService {
   listeners = [
@@ -14,8 +15,10 @@ export class MidiService {
   ];
   output;
 
+  serverChannel: string;
+
   /* @ngInject */
-  constructor(private $log: ng.ILogService, private $q: ng.IQService) {}
+  constructor(private $log: ng.ILogService, private $q: ng.IQService, private sockJSMidiService: SockJSMidiService) {}
 
   connect() {
     return this.$q((resolve, reject) => {
@@ -30,6 +33,11 @@ export class MidiService {
         }
       });
     });
+  }
+
+  setServerChannel(serverChannel: string) {
+    this.serverChannel = serverChannel;
+    console.log('---- setting server channel to %s', this.serverChannel);
   }
 
   getOutputs() {
@@ -80,6 +88,7 @@ export class MidiService {
   }
 
   sendEvent(noteData: any) {
+    this.sockJSMidiService.sendMessage({type: 'midi', channel: this.serverChannel, midi: noteData});
     if (this.output) {
       setTimeout(() => {
         // this.output.playNote(noteData.note.name + noteData.note.octave);
@@ -97,7 +106,9 @@ export class MidiService {
     }
   }
 
-
+  playRemoteMidiMessage(data: any) { // todo: define server message format
+    console.log('remote data message received: %o', data);
+  }
 }
 
 app.service('midiService', MidiService);

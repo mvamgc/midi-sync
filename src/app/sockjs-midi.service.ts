@@ -35,7 +35,8 @@ export class SockJSMidiService {
   sock: SockJSClass;
   openListeners: ((connectionId: string) => void)[] = [];
   closeListeners: (() => void)[] = [];
-  dataMessageListeners: ((data) => void)[] = [];
+  dataMessageListeners: ((data: any) => void)[] = [];
+  connected: boolean = false;
 
   /* @ngInject */
   constructor(private $log: angular.ILogService) {
@@ -48,10 +49,12 @@ export class SockJSMidiService {
       console.log('open: %o', event);
       console.log('this.sock: %o', sock);
       // sock.send('test-1');
-    };
+      this.connected = true;
+    }.bind(this);
     this.sock.onclose = function() {
       console.log('close');
       this.sendCloseNotifications();
+      this.connected = false;
     }.bind(this);
     this.sock.onmessage = this.onmessage.bind(this);
   }
@@ -63,10 +66,21 @@ export class SockJSMidiService {
   onClose(closeListener: () => void) {
     this.closeListeners.push(closeListener);
   }
+  onDataMessage(dataListener: () => void) {
+    this.dataMessageListeners.push(dataListener);
+  }
 
   close() {
     this.sock.close();
     this.sendCloseNotifications();
+  }
+
+  sendMessage(msg: any) {
+    msg.sendCl = new Date();
+    if (this.connected) {
+      var msgJson = JSON.stringify(msg);
+      this.sock.send(msgJson);
+    }
   }
 
   private sendCloseNotifications() {
@@ -78,13 +92,9 @@ export class SockJSMidiService {
     const data = JSON.parse(event.data);
     if (data.type === 'connected') {
       this.openListeners.forEach(listener => listener(data.connectionId));
+    } else {
+      this.dataMessageListeners.forEach(listener => listener(data));
     }
-  }
-
-  sendMessage(msg: any) {
-    msg.sendCl = new Date();
-    var msgJson = JSON.stringify(msg);
-    this.sock.send(msgJson);
   }
 }
 
