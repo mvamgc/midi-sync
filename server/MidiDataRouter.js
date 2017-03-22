@@ -18,7 +18,7 @@ module.exports = class MidiDataRouter {
     if(this.conChannelMap[conId]) {
       var currentChannel = this.conChannelMap[conId];
       this.channelConMap[this.conChannelMap[conId]] = this.channelConMap[this.conChannelMap[conId]].filter(id => id !== conId);
-      
+
       if(this.channelConMap[this.conChannelMap[conId]].length === 0) {
         delete this.channelConMap[this.conChannelMap[conId]];
       }
@@ -50,12 +50,13 @@ module.exports = class MidiDataRouter {
         msg2Send.echo = true;
       }
       console.log('send data to connection: ' + conToSendId);
-      this.connections[conToSendId].write(JSON.stringify(msg2Send));
+      // setTimeout(() =>
+      this.connections[conToSendId].write(JSON.stringify(msg2Send))
+      // , 2000);
     });
   }
 
   updateChannelForConnection(conId, channel) {
-    // todo: delete outdated channels
     console.log(`conId: ${conId}, channel: ${channel}`);
     if (this.conChannelMap[conId] !== channel) {
       console.log('updating channel');

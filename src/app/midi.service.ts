@@ -18,7 +18,9 @@ export class MidiService {
   serverChannel: string;
 
   /* @ngInject */
-  constructor(private $log: ng.ILogService, private $q: ng.IQService, private sockJSMidiService: SockJSMidiService) {}
+  constructor(private $log: ng.ILogService, private $q: ng.IQService, private sockJSMidiService: SockJSMidiService) {
+    sockJSMidiService.onDataMessage(this.playRemoteMidiMessage.bind(this));
+  }
 
   connect() {
     return this.$q((resolve, reject) => {
@@ -89,6 +91,7 @@ export class MidiService {
 
   sendEvent(noteData: any) {
     this.sockJSMidiService.sendMessage({type: 'midi', channel: this.serverChannel, midi: noteData});
+    /*
     if (this.output) {
       setTimeout(() => {
         // this.output.playNote(noteData.note.name + noteData.note.octave);
@@ -104,10 +107,35 @@ export class MidiService {
         this.output.send(status, rawData);
       }, 2000);
     }
+    */
   }
 
   playRemoteMidiMessage(data: any) { // todo: define server message format
     console.log('remote data message received: %o', data);
+    if (data.type === 'midi') { // && !data.echo
+      let noteData = data.midi;
+      if (this.output) {
+        // setTimeout(() => {
+          // this.output.playNote(noteData.note.name + noteData.note.octave);
+          // this.output.sendData();
+          console.log('noteData.data: %o', noteData.data);
+          var status = noteData.data[0];
+          var rawData = [];
+          for (var i = 1; ; i++) {
+            if (noteData.data[i] === undefined) {
+              break;
+            }
+            rawData.push(noteData.data[i]);
+          }
+
+          // console.log('sending status: %o', status);
+          // console.log('sending rawData: %o', rawData);
+          var latency = new Date().getTime() - new Date(data.sendCl).getTime();
+          console.log('latency: %o ms', latency);
+          this.output.send(status, rawData);
+        // }, 1000);
+      }
+    }
   }
 }
 

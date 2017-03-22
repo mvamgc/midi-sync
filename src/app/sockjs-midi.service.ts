@@ -66,7 +66,7 @@ export class SockJSMidiService {
   onClose(closeListener: () => void) {
     this.closeListeners.push(closeListener);
   }
-  onDataMessage(dataListener: () => void) {
+  onDataMessage(dataListener: (data: any) => void) {
     this.dataMessageListeners.push(dataListener);
   }
 
@@ -99,4 +99,3 @@ export class SockJSMidiService {
 }
 
 app.service('sockJSMidiService', SockJSMidiService);
-
