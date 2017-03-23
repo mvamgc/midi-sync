@@ -9,11 +9,12 @@ class MainController {
   outputs: any[] = [];
   selectedOutput: any = {name: 'MIDI Output is not available'};
   outputDisabled: boolean = true;
+  latencySummary: string;
 
   connected: boolean;
 
   /* @ngInject */
-  constructor(private $log: angular.ILogService, private midiService: MidiService) {
+  constructor(private $log: angular.ILogService, private $interval: angular.IIntervalService, private midiService: MidiService) {
     midiService.connect().then(() => {
       console.log('Output[0]: %o', midiService.getOutputs()[0]);
       this.inputs = midiService.getInputs();
@@ -27,6 +28,8 @@ class MainController {
       console.log(this.inputs);
 
       this.connected = false;
+
+      $interval(() => this.latencySummary = midiService.latencySummary, 10000, 10000);
     });
   }
 

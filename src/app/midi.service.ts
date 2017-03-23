@@ -17,6 +17,10 @@ export class MidiService {
 
   serverChannel: string;
 
+  latencyRecTime = 60000;
+  latencyTable: {time: number, latency: number, timeStr: string}[] = [];
+  latencySummary: string;
+
   /* @ngInject */
   constructor(private $log: ng.ILogService, private $q: ng.IQService, private sockJSMidiService: SockJSMidiService) {
     sockJSMidiService.onDataMessage(this.playRemoteMidiMessage.bind(this));
@@ -130,12 +134,40 @@ export class MidiService {
 
           // console.log('sending status: %o', status);
           // console.log('sending rawData: %o', rawData);
-          var latency = new Date().getTime() - new Date(data.sendCl).getTime();
-          console.log('latency: %o ms', latency);
           this.output.send(status, rawData);
         // }, 1000);
       }
     }
+    var latency = new Date().getTime() - new Date(data.sendCl).getTime();
+    console.log('latency: %o ms', latency);
+    this.recordLatency(latency);
+  }
+
+  recordLatency(latency: number) {
+    var now = new Date().getTime();
+    this.latencyTable.push({time: now, latency, timeStr: new Date().toString()});
+    this.latencyTable = this.latencyTable.filter(lr => now - lr.time < this.latencyRecTime);
+
+    this.latencySummary = '';
+    if (this.latencyTable.length > 0) {
+      let min = this.latencyTable[0].latency;
+      let max = this.latencyTable[0].latency;
+      let total = 0;
+      for (let i = 0; i < this.latencyTable.length; i++) {
+        if (min > this.latencyTable[i].latency) {
+          min = this.latencyTable[i].latency;
+        }
+        if (max < this.latencyTable[i].latency) {
+          max = this.latencyTable[i].latency;
+        }
+        total += this.latencyTable[i].latency;
+      }
+      let average = total / this.latencyTable.length;
+
+      this.latencySummary = `Latency summary for last ${this.latencyRecTime / 1000} seconds: numberOfRex=${this.latencyTable.length}, min=${min}, max=${max}, average=${average}`;
+      console.log(this.latencySummary);
+    }
+    // console.table(this.latencyTable);
   }
 }
 
