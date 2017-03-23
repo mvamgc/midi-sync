@@ -116,7 +116,7 @@ export class MidiService {
 
   playRemoteMidiMessage(data: any) { // todo: define server message format
     console.log('remote data message received: %o', data);
-    if (data.type === 'midi') { // && !data.echo
+    if (data.type === 'midi' && !data.echo) {
       let noteData = data.midi;
       if (this.output) {
         // setTimeout(() => {
