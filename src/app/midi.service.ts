@@ -153,6 +153,7 @@ export class MidiService {
       let min = this.latencyTable[0].latency;
       let max = this.latencyTable[0].latency;
       let total = 0;
+      let totalSq = 0;
       for (let i = 0; i < this.latencyTable.length; i++) {
         if (min > this.latencyTable[i].latency) {
           min = this.latencyTable[i].latency;
@@ -163,8 +164,11 @@ export class MidiService {
         total += this.latencyTable[i].latency;
       }
       let average = total / this.latencyTable.length;
+      for (let i = 0; i < this.latencyTable.length; i++) {
+        totalSq += (this.latencyTable[i].latency - average) * (this.latencyTable[i].latency - average);
+      }
 
-      this.latencySummary = `Latency summary for last ${this.latencyRecTime / 1000} seconds: numberOfRex=${this.latencyTable.length}, min=${min}, max=${max}, average=${average}`;
+      this.latencySummary = `Latency summary for last ${this.latencyRecTime / 1000} seconds: numberOfRex=${this.latencyTable.length}, min=${min}, max=${max}, average=${average}, deviation=${Math.sqrt(totalSq / this.latencyTable.length)}`;
       console.log(this.latencySummary);
     }
     // console.table(this.latencyTable);
