@@ -74,6 +74,10 @@ module.exports = {
           configuration: require('../tslint.json')
         }
       }
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
     })
   ],
   output: {
