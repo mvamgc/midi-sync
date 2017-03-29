@@ -168,7 +168,7 @@ export class MidiService {
         totalSq += (this.latencyTable[i].latency - average) * (this.latencyTable[i].latency - average);
       }
 
-      this.latencySummary = `Latency summary for last ${this.latencyRecTime / 1000} seconds: numberOfRex=${this.latencyTable.length}, min=${min}, max=${max}, average=${average}, deviation=${Math.sqrt(totalSq / this.latencyTable.length)}`;
+      this.latencySummary = `Latency summary for last ${this.latencyRecTime / 1000} seconds: numberOfRecs=${this.latencyTable.length}, min=${min}, max=${max}, average=${average}, deviation=${Math.sqrt(totalSq / this.latencyTable.length)}`;
       console.log(this.latencySummary);
     }
     // console.table(this.latencyTable);

@@ -29,7 +29,7 @@ class MainController {
 
       this.connected = false;
 
-      $interval(() => this.latencySummary = midiService.latencySummary, 10000, 10000);
+      $interval(() => this.latencySummary = midiService.latencySummary, 2000, 2000);
     });
   }
 
