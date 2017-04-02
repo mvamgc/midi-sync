@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-ui-router';
 
 import './index.less';
+import './app/keyboard/midi-keys.less';
 
 // export const app: string = 'app';
 
