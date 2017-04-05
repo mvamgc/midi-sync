@@ -1,3 +1,5 @@
+@import "midi-keys-octave.less";
+
 .keybox {
   font-size: 0;
   position: relative;
@@ -6,59 +8,5 @@
   }
 }
 
-.blackkeys {
-  position: absolute;
-  z-index: 2;
-  height: 0;
-  width: 100%;
-  .spacer {
-    display: inline-block;
-    height: 0;
-  }
-  .spacer1 {
-    width: 9.28571%;
-  }
-  .spacer2 {
-    width: 4.4%;
-  }
-  .spacer3 {
-    width: 18.5%;
-  }
-}
 
-.key {
-  display: inline-block;
-}
-
-.black {
-  background: black;
-}
-
-.white {
-  background: white;
-  border: 1px solid black;
-}
-
-.white.pressed {
-  background: gray;
-}
-
-.black.pressed {
-  background: gray;
-}
-
-
-.black {
-  width: 10%;
-  height: 120px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.white {
-  width: 14.2857%;
-  height: 200px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
 
