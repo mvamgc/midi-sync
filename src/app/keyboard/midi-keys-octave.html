@@ -11,11 +11,12 @@
     <span class="spacer spacer2"></span>
     <span class="black key"></span>
   </div>
-  <span class="white key"></span>
-  <span class="white key"></span>
-  <span class="white key"></span>
-  <span class="white key"></span>
-  <span class="white key"></span>
-  <span class="white key"></span>
-  <span class="white key"></span>
+  <!-- C D E F G A B -->
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('C')}" ng-mousedown="$ctrl.keyPress('C')" ng-mouseup="$ctrl.keyDepress('C')"></span>
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('D')}" ng-mousedown="$ctrl.keyPress('D')" ng-mouseup="$ctrl.keyDepress('D')"></span>
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('E')}" ng-mousedown="$ctrl.keyPress('E')" ng-mouseup="$ctrl.keyDepress('E')"></span>
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('F')}" ng-mousedown="$ctrl.keyPress('F')" ng-mouseup="$ctrl.keyDepress('F')"></span>
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('G')}" ng-mousedown="$ctrl.keyPress('G')" ng-mouseup="$ctrl.keyDepress('G')"></span>
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('A')}" ng-mousedown="$ctrl.keyPress('A')" ng-mouseup="$ctrl.keyDepress('A')"></span>
+  <span class="white key" ng-class="{pressed: $ctrl.isPressed('B')}" ng-mousedown="$ctrl.keyPress('B')" ng-mouseup="$ctrl.keyDepress('B')"></span>
 </div>
