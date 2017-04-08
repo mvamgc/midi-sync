@@ -3,6 +3,9 @@ import {app} from '../app.module';
 class KeysOctaveController {
   pressedKeys = new Set();
 
+  /* @ngInject */
+  constructor(private $timeout: angular.ITimeoutService) {}
+
   keyPress(note: string) {
     console.log(`key press: ${note}`);
     this.pressedKeys.add(note);
@@ -10,6 +13,13 @@ class KeysOctaveController {
   keyDepress(note: string) {
     console.log(`key depress: ${note}`);
     this.pressedKeys.delete(note);
+  }
+
+  keyClick(note: string) {
+    // this.$timeout(() => {
+    //   this.pressedKeys.delete(note);
+    //   console.log(`key click: ${note}`);
+    // }, 200);
   }
 
   isPressed(note: string): boolean {
