@@ -2,6 +2,7 @@ import {app} from '../app.module';
 
 class KeysOctaveController {
   pressedKeys = new Set();
+  octave: string;
 
   /* @ngInject */
   constructor(private $timeout: angular.ITimeoutService) {}
@@ -9,6 +10,7 @@ class KeysOctaveController {
   keyPress(note: string) {
     console.log(`key press: ${note}`);
     this.pressedKeys.add(note);
+    this.play(note);
   }
   keyDepress(note: string) {
     console.log(`key depress: ${note}`);
@@ -25,11 +27,18 @@ class KeysOctaveController {
   isPressed(note: string): boolean {
     return this.pressedKeys.has(note);
   }
+
+  play(note: string) {
+    console.log(`playing ${note}${this.octave}`);
+  }
 }
 
 export const keysOctave: angular.IComponentOptions = {
   template: require('./midi-keys-octave.html'),
-  controller: KeysOctaveController
+  controller: KeysOctaveController,
+  bindings: {
+    octave: '<'
+  }
 };
 
 app.component('midiKeysOctave', keysOctave);
