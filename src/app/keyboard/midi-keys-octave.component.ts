@@ -1,12 +1,25 @@
 import {app} from '../app.module';
 import {SoundfontPlayerService} from '../soundfont-player.service';
+import {SockJSMidiService} from '../sockjs-midi.service';
 
 class KeysOctaveController {
   pressedKeys = new Set();
   octave: string;
 
   /* @ngInject */
-  constructor(private $timeout: angular.ITimeoutService, private soundfontPlayer: SoundfontPlayerService) {}
+  constructor(private $timeout: angular.ITimeoutService, private $scope, private soundfontPlayer: SoundfontPlayerService, sockJSMidiService: SockJSMidiService) {
+    sockJSMidiService.onDataMessage(data => {
+      console.log('data in keys: %o %o %o', data.midi.note.name, data.midi.note.octave.toString(), this.octave);
+      if (data.midi.note.octave.toString() === this.octave.toString()) {
+        if (data.midi.type === 'noteon') {
+          $scope.$apply(() => this.keyPress(data.midi.note.name));
+        }
+        if (data.midi.type === 'noteoff') {
+          $scope.$apply(() => this.keyDepress(data.midi.note.name));
+        }
+      }
+    });
+  }
 
   keyPress(note: string) {
     console.log(`key press: ${note}`);
