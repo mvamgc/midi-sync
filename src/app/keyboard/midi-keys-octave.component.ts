@@ -1,11 +1,14 @@
 import {app} from '../app.module';
+import {SoundfontPlayerService} from '../soundfont-player.service';
 
 class KeysOctaveController {
   pressedKeys = new Set();
   octave: string;
 
   /* @ngInject */
-  constructor(private $timeout: angular.ITimeoutService) {}
+  constructor(private $timeout: angular.ITimeoutService, private soundfontPlayer: SoundfontPlayerService) {
+    this.soundfontPlayer.init();
+  }
 
   keyPress(note: string) {
     console.log(`key press: ${note}`);
@@ -30,6 +33,7 @@ class KeysOctaveController {
 
   play(note: string) {
     console.log(`playing ${note}${this.octave}`);
+    this.soundfontPlayer.play(note, this.octave);
   }
 }
 

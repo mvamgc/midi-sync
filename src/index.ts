@@ -17,5 +17,6 @@ import './index.less';
 
 // import {MidiService} from './app/midi.service';
 import './app/midi.service';
+import './app/soundfont-player.service';
 import {main} from './app/main.component';
 
