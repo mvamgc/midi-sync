@@ -6,9 +6,7 @@ class KeysOctaveController {
   octave: string;
 
   /* @ngInject */
-  constructor(private $timeout: angular.ITimeoutService, private soundfontPlayer: SoundfontPlayerService) {
-    this.soundfontPlayer.init();
-  }
+  constructor(private $timeout: angular.ITimeoutService, private soundfontPlayer: SoundfontPlayerService) {}
 
   keyPress(note: string) {
     console.log(`key press: ${note}`);
