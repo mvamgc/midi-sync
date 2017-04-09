@@ -14,6 +14,7 @@ class KeysOctaveController {
     console.log(`key press: ${note}`);
     this.pressedKeys.add(note);
     this.play(note);
+    this.$timeout(() => this.pressedKeys.delete(note), 5000);
   }
   keyDepress(note: string) {
     console.log(`key depress: ${note}`);
