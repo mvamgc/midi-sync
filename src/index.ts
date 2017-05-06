@@ -8,6 +8,8 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.less';
 
+import 'angular-ui-router'; // todo: delete after migration
+
 import {enableProdMode} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {AppModule} from './app';
