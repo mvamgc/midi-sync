@@ -1,13 +1,21 @@
 import {app} from '../app.module';
 import {SoundFontPlayerService} from '../services/soundfont-player.service';
 import {SockJSMidiService} from '../services/sockjs-midi.service';
+import {Component, Input} from '@angular/core';
+import {MidiMessageRouterService} from '../services/midi-message-router.service';
 
-class KeysOctaveController {
+@Component({
+  selector: 'octave',
+  template: require('./octave.html')
+})
+export class Octave {
   pressedKeys = new Set();
-  octave: string;
+  @Input() octave: string;
 
   /* @ngInject */
-  constructor(private $timeout: angular.ITimeoutService, private $scope, private soundfontPlayer: SoundFontPlayerService, sockJSMidiService: SockJSMidiService) {
+  constructor(private messageRouterService: MidiMessageRouterService) {
+    // todo: replace by MIDIMessageRouter
+    /*
     sockJSMidiService.onDataMessage(data => {
       console.log('data in keys: %o %o %o', data.midi.note.name, data.midi.note.octave.toString(), this.octave);
       if (data.midi.note.octave.toString() === this.octave.toString()) {
@@ -19,13 +27,14 @@ class KeysOctaveController {
         }
       }
     });
+    */
   }
 
   keyPress(note: string) {
     console.log(`key press: ${note}`);
     this.pressedKeys.add(note);
     this.play(note);
-    this.$timeout(() => this.pressedKeys.delete(note), 5000);
+    setTimeout(() => this.pressedKeys.delete(note), 5000);
   }
   keyDepress(note: string) {
     console.log(`key depress: ${note}`);
@@ -45,7 +54,7 @@ class KeysOctaveController {
 
   play(note: string) {
     console.log(`playing ${note}${this.octave}`);
-    this.soundfontPlayer.sendMidiMessage({
+    this.messageRouterService.dispatchMidiMessage({
       note: {
         name: note,
         octave: parseInt(this.octave, 10)
@@ -53,13 +62,3 @@ class KeysOctaveController {
     });
   }
 }
-
-export const keysOctave: angular.IComponentOptions = {
-  template: require('./octave.html'),
-  controller: KeysOctaveController,
-  bindings: {
-    octave: '<'
-  }
-};
-
-app.component('midiKeysOctave', keysOctave);
