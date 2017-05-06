@@ -7,10 +7,6 @@
     "noImplicitAny": false,
     "typeRoots": ["node_modules/@types/"],
     "types": [
-      "angular-ui-router",
-      "angular",
-      "angular-mocks",
-      "jquery",
       "node",
       "jasmine",
       "es6-shim"

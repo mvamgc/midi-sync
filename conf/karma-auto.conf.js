@@ -1,4 +1,5 @@
 const conf = require('./gulp.conf');
+const path = require('path');
 
 module.exports = function (config) {
   const configuration = {
@@ -10,32 +11,29 @@ module.exports = function (config) {
       outputDir: 'test-reports'
     },
     browsers: [
-      'PhantomJS'
+      'PhantomJS' // 'Chrome'
     ],
     frameworks: [
-      'jasmine',
-      'es6-shim'
+      'jasmine'
     ],
     files: [
       'node_modules/es6-shim/es6-shim.js',
-      conf.path.src('index.spec.js'),
-      conf.path.src('**/*.html')
+      conf.path.src('index.spec.js')
     ],
     preprocessors: {
       [conf.path.src('index.spec.js')]: [
         'webpack'
-      ],
-      [conf.path.src('**/*.html')]: [
-        'ng-html2js'
       ]
     },
-    ngHtml2JsPreprocessor: {
-      stripPrefix: `${conf.paths.src}/`
-    },
-    reporters: ['progress', 'coverage'],
-    coverageReporter: {
-      type: 'html',
-      dir: 'coverage/'
+    reporters: ['progress', 'coverage-istanbul', 'junit'],
+
+    coverageIstanbulReporter: {
+      reports: ['html', 'text-summary', 'cobertura'],
+      dir: 'coverage',
+      fixWebpackSourcePaths: true,
+      html: {
+        subdir: 'html'
+      }
     },
     webpack: require('./webpack-test.conf'),
     webpackMiddleware: {
@@ -46,10 +44,9 @@ module.exports = function (config) {
       require('karma-junit-reporter'),
       require('karma-coverage'),
       require('karma-phantomjs-launcher'),
-      require('karma-phantomjs-shim'),
-      require('karma-ng-html2js-preprocessor'),
-      require('karma-webpack'),
-      require('karma-es6-shim')
+      // require('karma-chrome-launcher'),
+      require('karma-coverage-istanbul-reporter'),
+      require('karma-webpack')
     ]
   };
 

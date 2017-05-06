@@ -34,7 +34,6 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         loaders: [
-          'ng-annotate-loader',
           'ts-loader'
         ]
       },
@@ -57,6 +56,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: conf.path.src('index.html')
     }),
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      conf.paths.src
+    ),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer],
@@ -71,8 +74,8 @@ module.exports = {
       debug: true
     }),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery'
     })
   ],
   devtool: 'source-map',
