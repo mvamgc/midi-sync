@@ -1,4 +1,4 @@
-import {app} from './app.module';
+import {app} from '../app.module';
 import *  as SockJS from 'sockjs-client';
 
 const URL = '/api/midi';
