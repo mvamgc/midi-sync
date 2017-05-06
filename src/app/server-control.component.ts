@@ -1,7 +1,7 @@
 import {app} from './app.module';
 import {generate} from 'project-name-generator';
-import {SockJSMidiService} from './sockjs-midi.service';
-import {MidiService} from './midi.service';
+import {SockJSMidiService} from './services/sockjs-midi.service';
+import {MidiService} from './services/midi.service';
 
 const CONNECT = 'Connect';
 const CONNECTING = 'Connecting';

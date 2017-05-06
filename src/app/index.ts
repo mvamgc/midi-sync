@@ -1,11 +1,21 @@
-import {module} from 'angular';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import routesConfig from '../routes';
+import {MidiMessageRouterService} from './services/midi-message-router.service';
+// todo: migrate and uncomment
+// import {Octave} from './keyboard/octave.component';
+// import {Keyboard} from './keyboard/keyboard.component';
+import {MainComponent} from './main.component';
+import {SoundFontPlayerService} from './services/soundfont-player.service';
 
-export let app = module('app', ['ui.router', 'ui.bootstrap']).config(routesConfig);
-
-import './main.component';
-import './server-control.component';
-import './sockjs-midi.service';
-import './keyboard/midi-keys.component';
-import './keyboard/midi-keys-octave.component';
+@NgModule({
+  imports: [
+    BrowserModule,
+  ],
+  declarations: [
+    // MainComponent, Keyboard, Octave
+  ],
+  providers: [MidiMessageRouterService, SoundFontPlayerService],
+  bootstrap: [MainComponent]
+})
+export class AppModule {}
