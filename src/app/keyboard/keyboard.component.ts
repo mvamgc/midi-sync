@@ -1,12 +1,8 @@
-import {app} from '../app.module';
+import {Component} from '@angular/core';
 
-class KeysController {
-
+@Component({
+  selector: 'keyboard',
+  template: require('./keyboard.html')
+})
+export class Keyboard {
 }
-
-export const keys: angular.IComponentOptions = {
-  template: require('./keyboard.html'),
-  controller: KeysController
-};
-
-app.component('midiKeys', keys);
