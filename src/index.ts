@@ -1,22 +1,23 @@
-// import * as angular from 'angular';
+import 'core-js/client/shim';
+import 'zone.js/dist/zone';
 
+import '@angular/common';
+import 'rxjs';
 
-import 'angular';
-import 'angular-ui-bootstrap';
-import 'angular-animate';
-import 'angular-touch';
 import 'bootstrap';
-
 import 'bootstrap/dist/css/bootstrap.css';
-
-import 'angular-ui-router';
-
 import './index.less';
 
-// export const app: string = 'app';
+import {enableProdMode} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {AppModule} from './app';
 
-// import {MidiService} from './app/midi.service';
-import './app/midi.service';
-import './app/soundfont-player.service';
-import {main} from './app/main.component';
+declare var process: any;
+if (process.env.NODE_ENV === 'production') {
+  enableProdMode();
+} else {
+  Error['stackTraceLimit'] = Infinity; // tslint:disable-line:no-string-literal
+  require('zone.js/dist/long-stack-trace-zone'); // tslint:disable-line:no-var-requires
+}
 
+platformBrowserDynamic().bootstrapModule(AppModule);
