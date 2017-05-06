@@ -1,13 +1,13 @@
 import {app} from '../app.module';
-import {SoundfontPlayerService} from '../soundfont-player.service';
-import {SockJSMidiService} from '../sockjs-midi.service';
+import {SoundFontPlayerService} from '../services/soundfont-player.service';
+import {SockJSMidiService} from '../services/sockjs-midi.service';
 
 class KeysOctaveController {
   pressedKeys = new Set();
   octave: string;
 
   /* @ngInject */
-  constructor(private $timeout: angular.ITimeoutService, private $scope, private soundfontPlayer: SoundfontPlayerService, sockJSMidiService: SockJSMidiService) {
+  constructor(private $timeout: angular.ITimeoutService, private $scope, private soundfontPlayer: SoundFontPlayerService, sockJSMidiService: SockJSMidiService) {
     sockJSMidiService.onDataMessage(data => {
       console.log('data in keys: %o %o %o', data.midi.note.name, data.midi.note.octave.toString(), this.octave);
       if (data.midi.note.octave.toString() === this.octave.toString()) {
@@ -45,7 +45,12 @@ class KeysOctaveController {
 
   play(note: string) {
     console.log(`playing ${note}${this.octave}`);
-    this.soundfontPlayer.play(note, this.octave);
+    this.soundfontPlayer.sendMidiMessage({
+      note: {
+        name: note,
+        octave: parseInt(this.octave, 10)
+      }
+    });
   }
 }
 
