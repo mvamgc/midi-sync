@@ -1,5 +1,21 @@
+import {Component} from '@angular/core';
+
+@Component({
+  selector: 'main',
+  template: require('./main.html')
+})
+export class MainComponent {
+  public text: string;
+
+  constructor() {
+  }
+}
+
+
+/*
 import {app} from './app.module';
-import {MidiService} from './midi.service';
+import {MidiService} from './services/midi.service';
+
 
 class MainController {
   inputs: any[] = [];
@@ -13,7 +29,7 @@ class MainController {
 
   connected: boolean;
 
-  /* @ngInject */
+  /* @ngInject
   constructor(private $log: angular.ILogService, private $interval: angular.IIntervalService, private midiService: MidiService) {
     midiService.connect().then(() => {
       console.log('Output[0]: %o', midiService.getOutputs()[0]);
@@ -63,3 +79,4 @@ export const main: angular.IComponentOptions = {
 app.component('main', main);
 
 
+*/
