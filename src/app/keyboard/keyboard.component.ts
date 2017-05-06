@@ -5,7 +5,7 @@ class KeysController {
 }
 
 export const keys: angular.IComponentOptions = {
-  template: require('./midi-keys.html'),
+  template: require('./keyboard.html'),
   controller: KeysController
 };
 

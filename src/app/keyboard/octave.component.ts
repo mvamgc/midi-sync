@@ -55,7 +55,7 @@ class KeysOctaveController {
 }
 
 export const keysOctave: angular.IComponentOptions = {
-  template: require('./midi-keys-octave.html'),
+  template: require('./octave.html'),
   controller: KeysOctaveController,
   bindings: {
     octave: '<'

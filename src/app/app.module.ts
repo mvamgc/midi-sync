@@ -7,5 +7,5 @@ export let app = module('app', ['ui.router', 'ui.bootstrap']).config(routesConfi
 import './main.component';
 import './server-control.component';
 import './services/sockjs-midi.service';
-import './keyboard/midi-keys.component';
-import './keyboard/midi-keys-octave.component';
+import './keyboard/keyboard.component';
+import './keyboard/octave.component';
