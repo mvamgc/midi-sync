@@ -42,6 +42,7 @@ export class Octave {
   }
 
   keyClick(note: string) {
+    this.keyPress(note);
     // this.$timeout(() => {
     //   this.pressedKeys.delete(note);
     //   console.log(`key click: ${note}`);
