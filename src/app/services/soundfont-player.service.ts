@@ -1,15 +1,16 @@
 import * as Soundfont from 'soundfont-player';
 
-import {app} from './app.module';
+import {Injectable} from '@angular/core';
+import {IMidiMessage} from './MidiMessage';
 
-export class SoundfontPlayerService {
+@Injectable()
+export class SoundFontPlayerService {
   instrument = 'acoustic_grand_piano';
   piano: any;
   initializing = false;
 
-  /* @ngInject */
-  constructor(private $timeout: angular.ITimeoutService) {
-    this.init();
+  constructor() {
+    // this.init();
   }
 
   init() {
@@ -21,13 +22,11 @@ export class SoundfontPlayerService {
     }
   }
 
-  play(note: string, octave: string) {
+  sendMidiMessage(midiMessage: IMidiMessage) {
     if (this.piano) {
-      let playValue = this.piano.start(note + octave);
+      let playValue = this.piano.start(midiMessage.note.name + (midiMessage.note.octave + 2));
       console.log(playValue);
       // this.$timeout(()=>this.piano.stop(playValue.id), 100);
     }
   }
 }
-
-app.service('soundfontPlayer', SoundfontPlayerService);
