@@ -1,14 +1,15 @@
 import {MainComponent} from './main.component';
 import {TestBed, async} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-// import {Octave} from './keyboard/octave.component';
-// import {Keyboard} from './keyboard/keyboard.component';
+import {Octave} from './keyboard/octave.component';
+import {Keyboard} from './keyboard/keyboard.component';
 import {MidiMessageRouterService} from './services/midi-message-router.service';
+import { AppSettings } from './app-settings.component';
 
 describe('main component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent], //, Keyboard, Octave
+      declarations: [MainComponent, Keyboard, Octave, AppSettings], //
       providers: [
         {
           provide: MidiMessageRouterService, useValue: {}
