@@ -24,4 +24,14 @@ describe('soundFontPlayerService service', () => {
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledWith('C6');
   });
+
+  it('should ignores notes if piano does not exist', () => {
+    soundFontPlayerService.piano = undefined;
+    soundFontPlayerService.sendMidiMessage({
+      note: {
+        name: 'C',
+        octave: 4
+      }
+    });
+  });
 });
