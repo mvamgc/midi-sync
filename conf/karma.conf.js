@@ -8,7 +8,7 @@ module.exports = function (config) {
     autoWatch: false,
     logLevel: 'INFO',
     junitReporter: {
-      outputDir: 'test-reports'
+      outputDir: conf.path.reports('test-reports'),
     },
     browsers: [
       'PhantomJS' // 'Chrome'
@@ -29,7 +29,7 @@ module.exports = function (config) {
 
     coverageIstanbulReporter: {
       reports: ['html', 'text-summary', 'cobertura'],
-      dir: 'coverage',
+      dir: conf.path.reports('coverage'),
       fixWebpackSourcePaths: true,
       html: {
         subdir: 'html'
