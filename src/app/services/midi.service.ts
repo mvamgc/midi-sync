@@ -1,6 +1,6 @@
 import * as WebMidi from 'webmidi';
 
-import {app} from '../app.module';
+// import {app} from '../app.module';
 import {SockJSMidiService} from './sockjs-midi.service';
 
 export class MidiService {
@@ -175,4 +175,4 @@ export class MidiService {
   }
 }
 
-app.service('midiService', MidiService);
+// app.service('midiService', MidiService);

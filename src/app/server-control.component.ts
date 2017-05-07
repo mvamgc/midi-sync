@@ -1,4 +1,4 @@
-import {app} from './app.module';
+// import {app} from './app.module';
 import {generate} from 'project-name-generator';
 import {SockJSMidiService} from './services/sockjs-midi.service';
 import {MidiService} from './services/midi.service';
@@ -65,4 +65,4 @@ export const serverControlComponent: angular.IComponentOptions = {
   controller: ServerControl
 };
 
-app.component('serverControl', serverControlComponent);
+// app.component('serverControl', serverControlComponent);

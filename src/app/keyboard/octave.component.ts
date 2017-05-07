@@ -1,6 +1,3 @@
-import {app} from '../app.module';
-import {SoundFontPlayerService} from '../services/soundfont-player.service';
-import {SockJSMidiService} from '../services/sockjs-midi.service';
 import {Component, Input} from '@angular/core';
 import {MidiMessageRouterService} from '../services/midi-message-router.service';
 
