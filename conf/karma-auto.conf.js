@@ -29,7 +29,7 @@ module.exports = function (config) {
 
     coverageIstanbulReporter: {
       reports: ['html', 'text-summary', 'cobertura'],
-      dir: 'coverage',
+      dir: conf.path.reports('coverage'),
       fixWebpackSourcePaths: true,
       html: {
         subdir: 'html'
