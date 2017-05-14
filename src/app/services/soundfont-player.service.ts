@@ -13,7 +13,6 @@ export class SoundFontPlayerService {
   soundfont: any;
 
   constructor() {
-    // this.init();
     if (typeof AudioContext !== 'undefined') {
       this.audioContext = new AudioContext();
     }
