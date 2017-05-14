@@ -47,7 +47,6 @@ describe('soundFontPlayerService service', () => {
       };
     }
     soundFontPlayerService.init().then(() => {
-      console.log('checking M');
       expect(soundFontPlayerService.piano.marker).toEqual('Piano object mock');
     });
   });
@@ -66,10 +65,8 @@ describe('soundFontPlayerService service', () => {
     soundFontPlayerService.init().then(
       () => fail('should fail without AC'),
       () => {
-        console.log('checking M');
         expect(soundFontPlayerService.piano).not.toBeDefined;
         done();
     });
-    // fail('make sure it reject the init');
   });
 });

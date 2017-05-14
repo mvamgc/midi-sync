@@ -21,13 +21,10 @@ export class SoundFontPlayerService {
 
   init() {
     return new Promise((resolve, reject) => {
-      console.log('init');
       if (!this.initializing && !this.piano && this.audioContext) {
         this.initializing = true;
-        console.log('init 2');
         this.soundfont.instrument(this.audioContext, this.instrument).then(function (piano: any) {
           this.piano = piano;
-          console.log('saved piano');
           this.initializing = false;
           resolve();
         }.bind(this));
