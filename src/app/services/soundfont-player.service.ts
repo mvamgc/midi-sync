@@ -9,17 +9,33 @@ export class SoundFontPlayerService {
   piano: any;
   initializing = false;
 
+  audioContext: AudioContext;
+  soundfont: any;
+
   constructor() {
     // this.init();
+    if (typeof AudioContext !== 'undefined') {
+      this.audioContext = new AudioContext();
+    }
+    this.soundfont = Soundfont;
   }
 
   init() {
-    if (!this.initializing && !this.piano) {
-      Soundfont.instrument(new AudioContext(), this.instrument).then(function (piano: any) {
-        this.piano = piano;
-        this.initializing = false;
-      }.bind(this));
-    }
+    return new Promise((resolve, reject) => {
+      console.log('init');
+      if (!this.initializing && !this.piano && this.audioContext) {
+        this.initializing = true;
+        console.log('init 2');
+        this.soundfont.instrument(this.audioContext, this.instrument).then(function (piano: any) {
+          this.piano = piano;
+          console.log('saved piano');
+          this.initializing = false;
+          resolve();
+        }.bind(this));
+      } else {
+        reject();
+      }
+    });
   }
 
   sendMidiMessage(midiMessage: IMidiMessage) {

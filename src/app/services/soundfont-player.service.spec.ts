@@ -34,4 +34,42 @@ describe('soundFontPlayerService service', () => {
       }
     });
   });
+
+  it('should init', () => {
+    if (typeof AudioContext === 'undefined') {
+      soundFontPlayerService.audioContext = <AudioContext> {};
+      expect(soundFontPlayerService.initializing).toBe(false);
+      soundFontPlayerService.soundfont = {
+        instrument: () => {
+          expect(soundFontPlayerService.initializing).toBe(true);
+          return Promise.resolve({marker: 'Piano object mock'});
+        }
+      };
+    }
+    soundFontPlayerService.init().then(() => {
+      console.log('checking M');
+      expect(soundFontPlayerService.piano.marker).toEqual('Piano object mock');
+    });
+  });
+
+  it('should not init without audio context', (done) => {
+    if (typeof AudioContext === 'undefined') {
+      soundFontPlayerService.audioContext = null;
+      expect(soundFontPlayerService.initializing).toBe(false);
+      soundFontPlayerService.soundfont = {
+        instrument: () => {
+          expect(soundFontPlayerService.initializing).toBe(true);
+          return Promise.resolve({marker: 'Piano object mock'});
+        }
+      };
+    }
+    soundFontPlayerService.init().then(
+      () => fail('should fail without AC'),
+      () => {
+        console.log('checking M');
+        expect(soundFontPlayerService.piano).not.toBeDefined;
+        done();
+    });
+    // fail('make sure it reject the init');
+  });
 });
